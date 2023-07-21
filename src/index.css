@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active-nav{
+  @apply  bg-white text-[#1b254b] text-lg font-semibold  hover:bg-slate-500 py-2 px-3 rounded-lg dark:bg-[#1b254b] dark:text-white
+}
+.default-nav{
+  @apply lg:text-white text-lg hover:text-slate-400 dark:text-[#1b254b]
+}
+.blue-primary{
+  @apply  bg-[#1b254b] text-white 
+}
+.blue-btn{
+  @apply bg-[#1b254b] text-white  py-2 px-3 rounded-lg
+}
+
+.active-das{
+  @apply  bg-white my-2 line-clamp-2 text-[#1b254b] p-2 rounded-lg
+}
+.default-das{
+  @apply lg:text-white text-lg hover:text-slate-400 my-2 line-clamp-2 p-2
+}
