@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../Authentication/AuthProvider';
 
 const option = <>
         <li > <NavLink to="/" className={({ isActive }) => (isActive ? "active-nav" : "default-nav")}>Home</NavLink></li>
@@ -8,6 +9,10 @@ const option = <>
         <li > <NavLink to="/mycollege" className={({ isActive }) => (isActive ? "active-nav" : "default-nav")}>My Collage</NavLink></li>
     </>
 const Navbar = () => {
+    const {user, logOut} = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+    }
     return (
         <div>
             <div className="navbar bg-base-100 purple-primary lg:px-5">
@@ -28,7 +33,10 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login"className="btn">Log in</Link>
+                {user ? <>
+                        <div className="text-sm font-semibold bg-white text-purple-500 rounded-2xl p-2"><Link to="/profile">{user?.displayName}</Link></div>
+                        <div onClick={handleLogOut} className="active-nav mx-5 ">Log Out</div>
+                    </> : <div className="active-nav mr-2"><Link to="/login">Log in</Link></div>}
                 </div>
             </div>
         </div>

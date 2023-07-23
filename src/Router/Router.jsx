@@ -8,6 +8,9 @@ import LogIn from "../Page/login/login";
 import Register from "../Page/Register/Register";
 import Forget from "../Page/ForgetPage/Forget";
 import Profile from "../Page/Profile/Profile";
+import UniversityDetails from "../Layout/Share/UniversityDetails";
+import PrivateRouter from "./PrivateRouter";
+import AdmissionFrom from "../Page/Admission/AdmissionFrom";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -19,7 +22,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/admission",
-          element: <Admission></Admission>,
+          element:  <PrivateRouter><Admission></Admission></PrivateRouter> ,
         },
         {
           path: "/mycollege",
@@ -44,6 +47,16 @@ const router = createBrowserRouter([
         {
           path: "/profile",
           element: <Profile></Profile>,
+        },
+        {
+          path: "/unidetail/:id",
+          element: <PrivateRouter><UniversityDetails></UniversityDetails></PrivateRouter>,
+          loader: ({params}) => fetch(`http://localhost:3000/universityDetails/${params.id}`)
+        },
+        {
+          path: "/admissionfrom/:id",
+          element: <AdmissionFrom></AdmissionFrom>,
+          loader: ({params}) => fetch(`http://localhost:3000//admissionData/${params.id}`)
         },
       ],
     },
