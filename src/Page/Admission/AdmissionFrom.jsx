@@ -8,7 +8,7 @@ const AdmissionFrom = () => {
     const [university, setUniversity] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/admissiondata/${params.id}`)
+        fetch(`https://admit-hub-server.vercel.app/admissiondata/${params.id}`)
             .then(res => res.json())
             .then(data => setUniversity(data));
     },)
@@ -30,7 +30,7 @@ const AdmissionFrom = () => {
 
         const collegeInfo = {name: name , photo: photoUrl , subject: subject , candidateEmail : candidateEmail , phoneNumber: phoneNumber , birth: birth , address: address , email: email , collegeName: collegeName , collegeImage: collegeImage}
         console.log(collegeInfo)
-        fetch("http://localhost:3000/collegeAdmission",{
+        fetch("https://admit-hub-server.vercel.app/collegeAdmission",{
             method: "PATCH",
             headers: {
                 "content-type" : "application/json"
@@ -110,7 +110,7 @@ const AdmissionFrom = () => {
                        <span className="label-text">Login Email</span>
                    </label>
                    <input type="text" placeholder={user.email} name="email" className="input input-bordered" readOnly/>
-               </div>z
+               </div>
                
            </div>
            

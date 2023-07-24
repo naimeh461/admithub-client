@@ -27,7 +27,7 @@ const Register = () => {
         createUser(email, password)
             .then(() => {
                 const saveUser = { name: name, email: email, photo: photo }
-                fetch('http://localhost:3000/users', {
+                fetch('https://admit-hub-server.vercel.app/users', {
                     method: "POST",
                     headers: {
                         "content-type": "application/json",

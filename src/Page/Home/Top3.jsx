@@ -5,7 +5,7 @@ const Top3 = () => {
     const [colleges, setColleges] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/universitydetails`)
+        fetch(`https://admit-hub-server.vercel.app/universitydetails`)
             .then(res => res.json())
             .then(data => setColleges(data));
     },[])

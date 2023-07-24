@@ -17,7 +17,7 @@ const SocialMediaLogin = () => {
                 const user = result.user;
                 console.log(user);
                 const saveUser = { name: user.displayName, email: user.email }
-                fetch('http://localhost:3000/users', {
+                fetch('https://admit-hub-server.vercel.app/users', {
                     method: "POST",
                     headers: {
                         "content-type": "application/json",

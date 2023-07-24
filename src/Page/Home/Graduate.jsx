@@ -3,7 +3,7 @@ import Marquee from "react-fast-marquee";
 const Graduate = () => {
     const [graduates, setGraduates] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:3000/graduate`)
+        fetch(`https://admit-hub-server.vercel.app/graduate`)
             .then(res => res.json())
             .then(data => setGraduates(data));
     }, [])

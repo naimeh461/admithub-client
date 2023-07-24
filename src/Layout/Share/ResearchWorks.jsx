@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ResearchWorks = ({ research }) => {
-    console.log(research)
+
     const { college_name, college_image, research_works } = research
     return (
         <div className='grid '>

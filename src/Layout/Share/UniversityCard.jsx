@@ -16,7 +16,7 @@ const UniversityCard = ({ college }) => {
                     <p><span className="text-lg font-semibold">Sports :</span> {sports.join(", ")}</p>
                     <p><span className="text-lg font-semibold">Research history : </span>{research_history}</p>
                     <div className="card-actions justify-end">
-                        <button className="btn purple-primary"><Link to={`/unidetail/${_id}`}>Details</Link></button>
+                        <button className="btn purple-primary"><Link to={`/universityDetails/${_id}`}>Details</Link></button>
                     </div>
                 </div>
             </div>

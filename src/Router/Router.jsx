@@ -12,6 +12,8 @@ import UniversityDetails from "../Layout/Share/UniversityDetails";
 import PrivateRouter from "./PrivateRouter";
 import AdmissionFrom from "../Page/Admission/AdmissionFrom";
 import Error from "../Page/Error/Error";
+import ProfileEdit from "../Page/Profile/ProfileEdit";
+import GiveReview from "../Layout/Share/GiveReview";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -28,7 +30,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/mycollege",
-          element: <MyCollege></MyCollege>,
+          element:<PrivateRouter> <MyCollege></MyCollege></PrivateRouter>,
         },
         {
           path: "/colleges",
@@ -51,13 +53,22 @@ const router = createBrowserRouter([
           element: <Profile></Profile>,
         },
         {
-          path: "/unidetail/:id",
+          path: "/universityDetails/:id",
           element: <PrivateRouter><UniversityDetails></UniversityDetails></PrivateRouter>,
-          loader: ({params}) => fetch(`http:/localhost:3000/universityDetails/${params.id}`)
         },
         {
           path: "/admissionfrom/:id",
-          element: <AdmissionFrom></AdmissionFrom>,
+          element: <PrivateRouter><AdmissionFrom></AdmissionFrom></PrivateRouter>,
+          
+        },
+        {
+          path: "/profileEdit/:email",
+          element: <PrivateRouter><ProfileEdit></ProfileEdit></PrivateRouter>,
+          
+        },
+        {
+          path: "/review/:id",
+          element: <PrivateRouter><GiveReview></GiveReview></PrivateRouter>,
           
         },
       ],

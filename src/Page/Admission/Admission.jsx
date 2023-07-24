@@ -5,10 +5,10 @@ const Admission = () => {
     const [colleges, setColleges] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/admission`)
+        fetch(`https://admit-hub-server.vercel.app/admission`)
             .then(res => res.json())
             .then(data => setColleges(data));
-    },)
+    },[])
     return (
         <div className='w-[80%] mx-auto flex flex-col gap-10 my-20'>
             {
