@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Authentication/AuthProvider';
 import {FaGoogle,FaGithub} from "react-icons/fa";
+import SocialMediaLogin from '../../Layout/Share/SocialMediaLogin';
 
 const LogIn = () => {
     const [error, setError] = useState("");
@@ -10,7 +11,7 @@ const LogIn = () => {
     const from = location.state?.from.pathname || "/"
     const navigate = useNavigate();
 
-    const {googleSignIn,gitHubUser,signIn} = useContext(AuthContext)
+    const {googleSignIn,signIn} = useContext(AuthContext)
     const handleLogin=(event)=> {
         event.preventDefault();
         setSuccess("");
@@ -31,31 +32,7 @@ const LogIn = () => {
             setError(error.message);
         })
     }
-    const handleGoogle =() => {
-        googleSignIn()
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            setSuccess("User login Successfully")
-            navigate(from, {replace: true})
-            
-        })
-        .catch((error) => {
-            setError(error.message);
-        })
-    }
-
-    const handleGitHub = () =>{
-        gitHubUser()
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            navigate(from, {replace: true})
-        })
-        .catch((error) => {
-            setError(error.message);
-        })
-    }
+ 
     return (
         <div>
         <Form onSubmit={handleLogin} className="hero min-h-screen bg-base-200">
@@ -88,10 +65,11 @@ const LogIn = () => {
                             <div className="form-control mt-6">
                             <button className="btn purple-primary">Login</button>
 
-                            <div className='mt-10  flex justify-between gap-2'>
-                                <button className="p-2 rounded-lg text-sm purple-primary  flex items-center gap-2 " onClick={handleGoogle}>Login with Google <FaGoogle /></button>
-                                <button className="p-2 rounded-lg text-sm purple-primary  flex items-center gap-2" onClick={handleGitHub}><p>Login with GitHub</p> <FaGithub /></button>
+                          
+                            <div className='flex flex-col justify-center items-center'>
+                                <SocialMediaLogin></SocialMediaLogin>
                             </div>
+                           
                             <label className="label mt-2">
                                 <p>Do not Have an Account ? <Link className='text-[#75458d] ' to="/register">Register</Link> <br /></p>
                             </label>

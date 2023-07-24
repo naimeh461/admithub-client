@@ -11,10 +11,12 @@ import Profile from "../Page/Profile/Profile";
 import UniversityDetails from "../Layout/Share/UniversityDetails";
 import PrivateRouter from "./PrivateRouter";
 import AdmissionFrom from "../Page/Admission/AdmissionFrom";
+import Error from "../Page/Error/Error";
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
+      errorElement: <Error></Error>,
       children: [
         {
           path: "/",
@@ -51,12 +53,12 @@ const router = createBrowserRouter([
         {
           path: "/unidetail/:id",
           element: <PrivateRouter><UniversityDetails></UniversityDetails></PrivateRouter>,
-          loader: ({params}) => fetch(`http://localhost:3000/universityDetails/${params.id}`)
+          loader: ({params}) => fetch(`http:/localhost:3000/universityDetails/${params.id}`)
         },
         {
           path: "/admissionfrom/:id",
           element: <AdmissionFrom></AdmissionFrom>,
-          loader: ({params}) => fetch(`http://localhost:3000//admissionData/${params.id}`)
+          
         },
       ],
     },

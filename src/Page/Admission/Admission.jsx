@@ -16,8 +16,8 @@ const Admission = () => {
                     <div key={college._id}>
                         <div className="card lg:card-side bg-base-100 shadow-2xl ">
                             <figure><img className='w-[50%]' src={college.college_image} alt="Album" /></figure>
-                            <div className="card-body">
-                                <h2 className="card-title text-[#291334]"><Link to ={`/admissionfrom/${college._id}`}>{college.college_name}</Link></h2>
+                            <div className="card-body ">
+                                <h2 className="card-title text-[#291334] "><Link to ={`/admissionfrom/${college._id}`}>{college.college_name}</Link></h2>
                             </div>
                         </div>
                     </div>
