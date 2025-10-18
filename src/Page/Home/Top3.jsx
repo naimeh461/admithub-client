@@ -11,7 +11,7 @@ const Top3 = () => {
     },[])
     return (
         <div className='my-20 flex flex-col gap-10  mt-48'>
-            <h2 className='text-center text-4xl font-bold  text-[#291334]'>Toy 3 University</h2>
+            <h2 className='text-center text-4xl font-bold  text-[#291334] text-purple-600'>Toy 3 University</h2>
             {
                 colleges.map(college => <UniversityCard key={college._id} college={college}></UniversityCard>)
             }

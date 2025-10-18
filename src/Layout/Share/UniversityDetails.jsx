@@ -12,42 +12,94 @@ const UniversityDetails = () => {
             .then(res => res.json())
             .then(data => setUniversity(data));
     }, [])
-    const {college_name,college_image, admission_data ,events, research_history, sports , college_rating , number_of_research , admission_process , events_details , research_works , sports_categories } = university
+    const { college_name, college_image, admission_data, events, research_history, sports, college_rating, number_of_research, admission_process, events_details, research_works, sports_categories } = university
     return (
-        <div className="w-[80%] m-auto">
-         <div className="ring-2 ring-[#291334] ring-inset rounded-lg my-20">
-            <div className="flex justify-between purple-primary p-5 rounded-t-md">
-                    <h2 className="text-3xl font-bold">{college_name}</h2>
-                    <Rating  className="" style={{ maxWidth: 100 }} value={Math.round(college_rating)}/>
+        <div className="w-[85%] mx-auto my-16 bg-white rounded-2xl shadow-xl overflow-hidden">
+            {/* Header */}
+            <div className="flex flex-wrap justify-between items-center bg-gradient-to-r from-purple-700 to-purple-400 text-white p-6 rounded-t-2xl">
+                <h2 className="text-3xl font-bold">{college_name}</h2>
+                <Rating style={{ maxWidth: 120 }} value={Math.round(college_rating)} />
             </div>
-           <div className='text-center flex justify-center  p-10'>
-           <figure className=''><img className="" src={college_image} alt="Album"/></figure>
-           </div>
-            <div className="flex flex-col gap-6 mt-4 text-center p-2 ">
-                <p className="text-xl font-semibold"><span className="text-lg font-semibold">Admission Date :</span> {admission_data}</p>
-                <p><span className="text-lg font-semibold">Admission Process :</span> {admission_process}</p>
-                <p><span className="text-lg font-semibold">Events :</span> {events?.join(", ")}</p>
-                <p><span className="text-lg font-semibold">Sports :</span> {sports?.join(", ")}</p>
-                <p><span className="text-lg font-semibold">Research History :</span> {research_history}</p>
-                <p><span className="text-lg font-semibold">Number of Research :</span> {number_of_research}</p>
-                <p className=' purple-primary text-center p-2 rounded-lg w-[80%] mx-auto'><p className="text-lg font-semibold underline-offset-8 bg-white p-2 text-purple-950 mb-2">Sports</p> {sports_categories?.map((sport, index) => <div key={index}>
-                    <div className='grid grid-cols-3 text-center justify-center items-center  p-2 rounded-2xl gap-10 mb-2 bg-[#3f204e]'>
-                    <p c>Sports : {sport.category_name}</p>
-                    <p>Team : {sport.team_name}</p>
-                    <p>Captain : {sport.captain}</p>
-                    </div>
-                </div>)}</p>
-                <p className=' purple-primary text-center p-2 rounded-lg w-[80%] mx-auto mb-10'><p className="text-lg font-semibold underline-offset-8 bg-white p-2 text-purple-950 mb-2">Research Work</p> {research_works?.map((work, index) => <div key={index}>
-                    <div className='grid grid-cols-3 text-center justify-center items-center  p-2 rounded-2xl mb-2 bg-[#3f204e]  gap-10'>
-                    <p >Research Title : {work.title}</p>
-                    <p >Date : {work.publication_date}</p>
-                    <p> Authors : {work.authors.join(", ")}</p>
-                    
-                    </div>
-                </div>)}</p>
+
+            {/* Image */}
+            <div className="flex justify-center bg-gradient-to-b from-purple-100 to-white p-10">
+                <figure>
+                    <img
+                        className="rounded-xl shadow-lg w-full max-w-3xl object-cover "
+                        src={college_image}
+                        alt="University"
+                    />
+                </figure>
             </div>
-    </div>
-    </div>
+
+            {/* Info Section */}
+            <div className="flex flex-col gap-6 mt-4 text-center p-6 bg-purple-50 rounded-b-2xl">
+                <p className="text-lg">
+                    <span className="font-semibold text-purple-900">Admission Date:</span> {admission_data}
+                </p>
+                <p>
+                    <span className="font-semibold text-purple-900">Admission Process:</span> {admission_process}
+                </p>
+                <p>
+                    <span className="font-semibold text-purple-900">Events:</span>{" "}
+                    {Array.isArray(events)
+                        ? events.join(", ")
+                        : typeof events === "object"
+                            ? Object.values(events).join(", ")
+                            : events}
+                </p>
+                <p>
+                    <span className="font-semibold text-purple-900">Sports:</span>{" "}
+                    {Array.isArray(sports)
+                        ? sports.join(", ")
+                        : typeof sports === "object"
+                            ? Object.values(sports).join(", ")
+                            : sports}
+                </p>
+                <p>
+                    <span className="font-semibold text-purple-900">Research History:</span> {research_history}
+                </p>
+                <p>
+                    <span className="font-semibold text-purple-900">Number of Research:</span>{" "}
+                    {number_of_research}
+                </p>
+
+                {/* Sports Section */}
+                <div className="bg-gradient-to-br from-purple-600 to-purple-800 text-white rounded-xl p-6 w-[85%] mx-auto shadow-md">
+                    <h3 className="text-2xl font-semibold mb-4">🏅 Sports</h3>
+                    <div className="space-y-3">
+                        {sports_categories?.map((sport, index) => (
+                            <div
+                                key={index}
+                                className="grid grid-cols-1 sm:grid-cols-3 bg-purple-700/30 backdrop-blur-sm rounded-lg p-4 shadow-md"
+                            >
+                                <p><span className="font-semibold">Sport:</span> {sport.category_name}</p>
+                                <p><span className="font-semibold">Team:</span> {sport.team_name}</p>
+                                <p><span className="font-semibold">Captain:</span> {sport.captain}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Research Section */}
+                <div className="bg-gradient-to-br from-purple-700 to-purple-900 text-white rounded-xl p-6 w-[85%] mx-auto shadow-md mb-10">
+                    <h3 className="text-2xl font-semibold mb-4">🧠 Research Works</h3>
+                    <div className="space-y-3">
+                        {research_works?.map((work, index) => (
+                            <div
+                                key={index}
+                                className="grid grid-cols-1 sm:grid-cols-3 bg-purple-800/40 backdrop-blur-sm rounded-lg p-4 shadow-md"
+                            >
+                                <p><span className="font-semibold">Title:</span> {work.title}</p>
+                                <p><span className="font-semibold">Date:</span> {work.publication_date}</p>
+                                <p><span className="font-semibold">Authors:</span> {work.authors.join(", ")}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+
     );
 };
 

@@ -18,15 +18,15 @@ const FindColleges = () => {
 
     return (
         <div>
-            <div className="input-group w-[80%] mx-auto mt-20">
+            <div className="input-group w-[80%] mx-auto  mt-20">
                 <input type="text" ref={searchRef} placeholder="Search" className="input input-bordered w-[90%]" />
-                <button onClick={handleSearch} className="btn btn-square purple-primary"><AiOutlineSearch></AiOutlineSearch></button>
+                <button onClick={handleSearch} className="btn btn-square bg-gradient-to-r from-purple-600 to-pink-500 text-white"><AiOutlineSearch></AiOutlineSearch></button>
             </div>
-            <div className='grid grid-cols-1  lg:grid-cols-3 gap-5 my-20 w-[80%] mx-auto'>
+            <div className='grid grid-cols-1  lg:grid-cols-3 gap-5 my-20 w-[80%] mx-auto '>
             {
                 colleges.map(college =>
                     <div key={college._id} className='' >
-                        <div className="card w-96 glass">
+                        <div className="card md:w-96 glass ">
                             <figure className='p-10'><img  src={college.college_image} alt="car!" /></figure>
                             <div className="card-body  text-center">
                                 <h2 className="text-xl font-semibold">{college.college_name}</h2>

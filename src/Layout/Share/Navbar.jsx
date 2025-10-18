@@ -1,46 +1,117 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../Authentication/AuthProvider';
 
-const option = <>
-        <li > <NavLink to="/" className={({ isActive }) => (isActive ? "active-nav" : "default-nav")}>Home</NavLink></li>
-        <li > <NavLink to="/colleges" className={({ isActive }) => (isActive ? "active-nav" : "default-nav")}>Colleges</NavLink></li>
-        <li > <NavLink to="/admission" className={({ isActive }) => (isActive ? "active-nav" : "default-nav")}>Admission</NavLink></li>
-        <li > <NavLink to="/mycollege" className={({ isActive }) => (isActive ? "active-nav" : "default-nav")}>My Collage</NavLink></li>
-    </>
 const Navbar = () => {
-    const {user, logOut} = useContext(AuthContext);
-    const handleLogOut = () => {
-        logOut()
+  const { user, logOut } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+      setIsOpen(false);
+    } catch (err) {
+      console.error('Logout error:', err);
     }
-    return (
-        <div>
-            <div className="navbar bg-base-100 purple-primary lg:px-5">
-                <div className="navbar-start">
-                    <div className="dropdown">
-                        <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                        </label>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            {option}
-                        </ul>
-                    </div>
-                    <a className="btn btn-ghost normal-case text-xl">AdmitHub</a>
-                </div>
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="purple-primary flex gap-5 px-1">
-                       {option}
-                    </ul>
-                </div>
-                <div className="navbar-end">
-                {user ? <>
-                        <div className="text-sm font-semibold bg-white text-purple-500 rounded-2xl p-2"><Link to="/profile">{user?.displayName}</Link></div>
-                        <div onClick={handleLogOut} className="active-nav mx-5 ">Log Out</div>
-                    </> : <div className="active-nav mr-2"><Link to="/login">Log in</Link></div>}
-                </div>
-            </div>
+  };
+
+  const linkClass = ({ isActive }) =>
+    isActive
+      ? 'text-purple-700 font-semibold border-b-2 border-purple-600 pb-1'
+      : 'text-gray-700 hover:text-purple-700 transition';
+
+  return (
+    <header className="bg-white shadow sticky top-0 z-50">
+      <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link
+          to="/"
+          className="text-2xl font-extrabold text-purple-700"
+        >
+          AdmitHub
+        </Link>
+
+        {/* Desktop Links */}
+        <ul className="hidden lg:flex gap-6">
+          <NavLink to="/" className={linkClass}>Home</NavLink>
+          <NavLink to="/colleges" className={linkClass}>Colleges</NavLink>
+          <NavLink to="/admission" className={linkClass}>Admission</NavLink>
+          <NavLink to="/mycollege" className={linkClass}>My College</NavLink>
+        </ul>
+
+        {/* User / Hamburger */}
+        <div className="flex items-center gap-4">
+          {user && (
+            <Link
+              to="/profile"
+              className="hidden sm:inline-flex px-3 py-1 bg-purple-100 text-purple-700 rounded-full"
+            >
+              {user.displayName || 'Profile'}
+            </Link>
+          )}
+
+          {user ? (
+            <button
+              onClick={handleLogOut}
+              className="hidden sm:inline-flex px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full"
+            >
+              Log Out
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="hidden sm:inline-flex px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full"
+            >
+              Log In
+            </Link>
+          )}
+
+          {/* Hamburger */}
+          <button
+            className="lg:hidden p-2 rounded-md border border-gray-300"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? (
+              <span className="text-xl font-bold">✕</span>
+            ) : (
+              <span className="text-xl font-bold">☰</span>
+            )}
+          </button>
         </div>
-    );
+      </nav>
+
+      {/* Mobile Menu */}
+      <div
+        className={`lg:hidden bg-white shadow-md transition-all duration-300 overflow-hidden ${
+          isOpen ? 'max-h-96 py-2' : 'max-h-0'
+        }`}
+      >
+        <ul className="flex flex-col gap-2 px-4">
+          <NavLink to="/" onClick={() => setIsOpen(false)} className="block px-2 py-1 rounded hover:bg-purple-50">Home</NavLink>
+          <NavLink to="/colleges" onClick={() => setIsOpen(false)} className="block px-2 py-1 rounded hover:bg-purple-50">Colleges</NavLink>
+          <NavLink to="/admission" onClick={() => setIsOpen(false)} className="block px-2 py-1 rounded hover:bg-purple-50">Admission</NavLink>
+          <NavLink to="/mycollege" onClick={() => setIsOpen(false)} className="block px-2 py-1 rounded hover:bg-purple-50">My College</NavLink>
+
+          {user ? (
+            <button
+              onClick={handleLogOut}
+              className="w-full text-left px-2 py-1 rounded bg-gradient-to-r from-purple-600 to-pink-500 text-white mt-2"
+            >
+              Log Out
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              onClick={() => setIsOpen(false)}
+              className="block px-2 py-1 rounded bg-gradient-to-r from-purple-600 to-pink-500 text-white mt-2"
+            >
+              Log In
+            </Link>
+          )}
+        </ul>
+      </div>
+    </header>
+  );
 };
 
 export default Navbar;
