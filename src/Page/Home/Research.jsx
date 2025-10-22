@@ -5,7 +5,7 @@ import ResearchWorks from '../../Layout/Share/ResearchWorks';
 const Research = () => {
     const [researches, setResearches] = useState([]);
     useEffect(() => {
-        fetch(`https://admit-hub-server.vercel.app/research`)
+        fetch(`http://localhost:3000/research`)
             .then(res => res.json())
             .then(data => setResearches(data));
     }, [])

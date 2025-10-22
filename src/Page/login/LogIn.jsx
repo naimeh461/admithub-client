@@ -1,90 +1,82 @@
 import React, { useContext, useState } from 'react';
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Authentication/AuthProvider';
-import {FaGoogle,FaGithub} from "react-icons/fa";
 import SocialMediaLogin from '../../Layout/Share/SocialMediaLogin';
 
 const LogIn = () => {
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
-    const location = useLocation()
-    const from = location.state?.from.pathname || "/"
-    const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate();
 
-    const {googleSignIn,signIn} = useContext(AuthContext)
-    const handleLogin=(event)=> {
-        event.preventDefault();
-        setSuccess("");
-        setError("");
-        const form = event.target
-        const password = form.password.value;
-        const email = form.email.value;
-        signIn(email,password)
+  const { signIn } = useContext(AuthContext);
 
-        .then(result => {
-              const signInUser = result.user
-              console.log(signInUser);
-              form.reset();
-              setSuccess("Your login successfully");
-              navigate(from, {replace: true})
-        })
-        .catch(error => {
-            setError(error.message);
-        })
-    }
- 
-    return (
-        <div>
-        <Form onSubmit={handleLogin} className="hero min-h-screen bg-base-200">
-                <div>
-                <h1 className="text-3xl font-bold mb-10 text-center">Log in</h1>
-                <div className=" text-center justify-center  items-center">
-                        <div className="-ml-32">
-                            
-                        </div>
-                    <div>
-                        <div className="text-center lg:text-left">
-                        </div>
-                        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                        <div className="card-body flex flex-col justify-center m-auto">
-                            <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="email" placeholder="email" name="email"className="input input-bordered" />
-                            </div>
-                            <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input type="password" placeholder="password" name="password" className="input input-bordered" />
-                            </div>
-                            <label className="label -mb-5 tex">
-                                <p><Link className='text-[#75458d] ' to="/forget">Forget Password</Link> <br /></p>
-                            </label>
-                            <div className="form-control mt-6">
-                            <button className="btn purple-primary">Login</button>
+  const handleLogin = (event) => {
+    event.preventDefault();
+    setSuccess("");
+    setError("");
 
-                          
-                            <div className='flex flex-col justify-center items-center'>
-                                <SocialMediaLogin></SocialMediaLogin>
-                            </div>
-                           
-                            <label className="label mt-2">
-                                <p>Do not Have an Account ? <Link className='text-[#75458d] ' to="/register">Register</Link> <br /></p>
-                            </label>
-                            </div>
-                            <p className='text-red-700 mt-3'>{error}</p>
-                            <p className='text-green-700 mt-3'>{success}</p>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signIn(email, password)
+      .then(result => {
+        const user = result.user;
+        form.reset();
+        setSuccess("Login successful!");
+        navigate(from, { replace: true });
+      })
+      .catch(err => setError(err.message));
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-white shadow-2xl rounded-2xl p-8">
+        <h2 className="text-4xl font-bold text-center text-purple-700 mb-6">Log In</h2>
+
+        <Form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="input input-bordered w-full rounded-lg px-4 py-2"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="input input-bordered w-full rounded-lg px-4 py-2"
+            required
+          />
+
+          <p className="text-sm text-right text-purple-600 hover:underline">
+            <Link to="/forget">Forgot Password?</Link>
+          </p>
+
+          <button className="btn w-full bg-gradient-to-r from-purple-600 to-pink-400 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-pink-500 transition-all duration-300">
+            Login
+          </button>
+
+          <div className="my-4 flex justify-center">
+            <SocialMediaLogin />
+          </div>
+
+          <p className="text-center text-sm text-gray-500">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-purple-600 font-semibold hover:underline">
+              Register
+            </Link>
+          </p>
+
+          {error && <p className="text-red-600 text-center mt-2">{error}</p>}
+          {success && <p className="text-green-600 text-center mt-2">{success}</p>}
         </Form>
-        </div>
-
-    );
+      </div>
+    </div>
+  );
 };
 
 export default LogIn;

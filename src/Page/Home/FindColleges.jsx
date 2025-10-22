@@ -6,7 +6,7 @@ const FindColleges = () => {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        fetch(`https://admit-hub-server.vercel.app/university?search=${search}`)
+        fetch(`http://localhost:3000/university?search=${search}`)
             .then(res => res.json())
             .then(data => setColleges(data));
     }, [search])

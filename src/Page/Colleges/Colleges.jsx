@@ -5,7 +5,7 @@ const Colleges = () => {
     const [colleges, setColleges] = useState([]);
 
     useEffect(() => {
-        fetch(`https://admit-hub-server.vercel.app/alluniversitydetails`)
+        fetch(`http://localhost:3000/alluniversitydetails`)
             .then(res => res.json())
             .then(data => setColleges(data));
     },[])

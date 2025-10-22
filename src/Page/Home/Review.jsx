@@ -12,7 +12,7 @@ const Review = () => {
     const [expanded, setExpanded] = useState({});
 
     useEffect(() => {
-        fetch("https://admit-hub-server.vercel.app/reviews")
+        fetch("http://localhost:3000/reviews")
             .then(res => res.json())
             .then(data => setReviews(data));
     }, []);
@@ -64,7 +64,7 @@ const Review = () => {
                             {review.review.length > 100 && (
                                 <button
                                     onClick={() => toggleExpand(review._id)}
-                                    className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition"
+                                    className="px-4  bg-purple-600 text-white rounded-full hover:bg-purple-700 transition"
                                 >
                                     {expanded[review._id] ? "Show Less" : "Read More"}
                                 </button>

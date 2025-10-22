@@ -16,8 +16,8 @@ const SocialMediaLogin = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                const saveUser = { name: user.displayName, email: user.email }
-                fetch('https://admit-hub-server.vercel.app/users', {
+                const saveUser = { name: user.displayName, email: user.email ,  role: "student"   }
+                fetch('http://localhost:3000/users', {
                     method: "POST",
                     headers: {
                         "content-type": "application/json",
@@ -44,8 +44,8 @@ const SocialMediaLogin = () => {
     return (
         <div >
             <div className='mt-10 '>
-                <button className="p-2 rounded-lg text-sm purple-primary flex items-center gap-2 " onClick={handleGoogle}>
-                    Register with Google <FaGoogle />
+                <button className="p-2 rounded-lg text-sm flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-400 text-white" onClick={handleGoogle}>
+                     Login or Register Google  <FaGoogle />
                 </button>
             </div>
         </div>

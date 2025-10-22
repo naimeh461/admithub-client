@@ -8,7 +8,7 @@ const UniversityCard = ({ college }) => {
         <div className="max-w-4xl md:mx-auto my-6 mx-10">
             <div className="flex flex-col md:flex-row md:bg-white bg-gray-500 dark:bg-purple-50 shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
                 {/* Image Section */}
-                <div className="  h-full py-10 md:py-24  bg-white">
+                <div className="  h-full py-10 md:py-24 mx-10  bg-white">
                     <img
                         src={college_image}
                         alt={college_name}

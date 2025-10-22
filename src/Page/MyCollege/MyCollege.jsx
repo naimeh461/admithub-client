@@ -8,7 +8,7 @@ const MyCollege = () => {
 
     const [userinfo, setUserinfo] = useState([]);
     useEffect(() => {
-        fetch(`https://admit-hub-server.vercel.app/addedclass/${user.email}`)
+        fetch(`http://localhost:3000/addedclass/${user.email}`)
             .then(res => res.json())
             .then(data => setUserinfo(data));
     }, [])

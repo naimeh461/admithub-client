@@ -8,7 +8,7 @@ const UniversityDetails = () => {
     const params = useParams();
     const [university, setUniversity] = useState([]);
     useEffect(() => {
-        fetch(`https://admit-hub-server.vercel.app/universityDetails/${params.id}`)
+        fetch(`http://localhost:3000/universityDetails/${params.id}`)
             .then(res => res.json())
             .then(data => setUniversity(data));
     }, [])
